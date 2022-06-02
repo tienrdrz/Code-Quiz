@@ -13,7 +13,20 @@ header h3 {
     padding: 5px 10px;
     font-weight: lighter;
     font-size: 20px;
-    text-align: center;
+}
+
+#question {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 50px;
+}
+
+#choices {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    justify-content: center;
+    margin: auto;
 }
 
 main {
@@ -29,10 +42,33 @@ main p {
     font-size: 20px;
 }
 
-.startbtn {
+.btn {
     background-color: rgb(58, 11, 121);
     color: white;
     font-size: 16px;
     padding: 10px 20px;
     border-radius: 10px;
+    margin: 5px;
+}
+
+.btn:hover {
+    background-color: rgb(190, 93, 255);
+}
+
+.hide { 
+    display:none;
+}
+
+footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    bottom: 0px;
+}
+
+footer h4 {
+    margin: 0;
+    padding: 5px 10px;
+    font-weight: lighter;
+    font-size: 16px;
 }
