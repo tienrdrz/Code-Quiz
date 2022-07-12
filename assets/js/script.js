@@ -9,7 +9,11 @@ var OptionTwo = document.querySelector("#btn2");
 var OptionThree = document.querySelector("#btn3");
 var OptionFour = document.querySelector("#btn4");
 
-var currentScore = document.querySelector("#score");
+var endGame = document.querySelector("#info");
+
+var finalScore = JSON.parse(localStorage.getItem("finalScore")) || [];
+
+var score = 0;
 var timer = document.querySelector("#timer")
 
 startBtn.addEventListener('click', startQuiz);
@@ -21,7 +25,6 @@ startBtn.addEventListener('click', startQuiz);
     questionOne();
     answerOne();
     startTimer();
-    getScore();
 };
 
 // function to start a timer 
@@ -34,18 +37,15 @@ var startTimer = function () {
         count--;
         timer.textContent = count;
         
-        if (counter = 0) {
-
-            alert("Out of time!")
+        if (count <= 0) {
+        questionPrompt.classList.add("hide");
+        endGame.classList.remove("hide");
+        document.getElementById("endtext").innerHTML = "Times up! If you would like to try again refresh the page, if not, please submit your score!"
+        timer.innerHTML = ""; 
         }
-    }, 1000);
+    },1000);
 };
 
-var score = 0;
-//setting score to 0 and creating a way to see your current score
-var getScore = function () {
-    currentScore.innerHTML = score;
-}
 
 function questionOne () {
     question.innerHTML = "Commonly used data types DO NOT include:"
@@ -58,21 +58,25 @@ function questionOne () {
 function answerOne () {
     OptionThree.onclick = function() {
         score++;
+        document.getElementById("score").innerHTML = score;
         questionTwo();
         answerTwo();
     }
     OptionOne.onclick = function() {
         score--;
+        document.getElementById("score").innerHTML = score;
         questionTwo();
         answerTwo();
     }
     OptionTwo.onclick = function() {
         score--;
+        document.getElementById("score").innerHTML = score;
         questionTwo();
         answerTwo();
     }
     OptionFour.onclick = function() {
         score--;
+        document.getElementById("score").innerHTML = score;
         questionTwo();
         answerTwo();
     }
@@ -82,28 +86,32 @@ function questionTwo () {
     question.innerHTML = "The condition in an if/else statement is enclosed with ______."
     OptionOne.textContent = "Quotes";
     OptionTwo.textContent = "Curly brackets";
-    OptionThree.textContent = "Parenthesis";  3
+    OptionThree.textContent = "Parenthesis";  
     OptionFour.textContent = "Square brackets"
 }    
 
 function answerTwo () {
     OptionThree.onclick = function() {
         score++;
+        document.getElementById("score").innerHTML = score;
         questionThree();
         answerThree();
     }
     OptionOne.onclick = function() {
         score--;
+        document.getElementById("score").innerHTML = score;
         questionThree();
         answerThree();
     }
     OptionTwo.onclick = function() {
         score--;
+        document.getElementById("score").innerHTML = score;
         questionThree();
         answerThree();
     }
     OptionFour.onclick = function() {
         score--;
+        document.getElementById("score").innerHTML = score;
         questionThree();
         answerThree();
     }
@@ -114,26 +122,30 @@ function questionThree() {
     OptionOne.textContent = "Numbers and strings";
     OptionTwo.textContent = "Other arrays";
     OptionThree.textContent = "Booleans";
-    OptionFour.textContent = "All of the Above";  4
+    OptionFour.textContent = "All of the Above";  
 }
 function answerThree () {
     OptionFour.onclick = function() {
         score++;
+        document.getElementById("score").innerHTML = score;
         questionFour();
         answerFour();
     }
     OptionOne.onclick = function() {
         score--;
+        document.getElementById("score").innerHTML = score;
         questionFour();
         answerFour();
     }
     OptionTwo.onclick = function() {
         score--;
+        document.getElementById("score").innerHTML = score;
         questionFour();
         answerFour();
     }
     OptionThree.onclick = function() {
         score--;
+        document.getElementById("score").innerHTML = score;
         questionFour();
         answerFour();
     }
@@ -143,27 +155,31 @@ function questionFour() {
     question.innerHTML = "String values must be enclosed within _____ when being assigned to variables.";
     OptionOne.textContent = "Commas";
     OptionTwo.textContent = "Curly brackets";
-    OptionThree.textContent = "Quotes"; 3
+    OptionThree.textContent = "Quotes"; 
     OptionFour.textContent = "Parenthesis";
 }
 function answerFour () {
     OptionThree.onclick = function() {
         score++;
+        document.getElementById("score").innerHTML = score;
         questionFive();
         answerFive();
     }
     OptionOne.onclick = function() {
         score--;
+        document.getElementById("score").innerHTML = score;
         questionFive();
         answerFive();
     }
     OptionTwo.onclick = function() {
         score--;
+        document.getElementById("score").innerHTML = score;
         questionFive();
         answerFive();
     }
     OptionFour.onclick = function() {
         score--;
+        document.getElementById("score").innerHTML = score;
         questionFive();
         answerFive();
     }
@@ -179,15 +195,37 @@ function questionFive() {
 function answerFive () {
     OptionOne.onclick = function() {
         score++;
+        document.getElementById("score").innerHTML = score;
+        highScore();
     }
     OptionThree.onclick = function() {
         score--;
+        document.getElementById("score").innerHTML = score;
+        highScore();
     }
     OptionTwo.onclick = function() {
         score--;
+        document.getElementById("score").innerHTML = score;
+        highScore();
     }
     OptionFour.onclick = function() {
         score--;
+        document.getElementById("score").innerHTML = score;
+        highScore();
     }
 }
-getScore();
+
+function highScore () {
+questionPrompt.classList.add('hide')
+    endGame.classList.remove("hide")
+}
+
+var playerInfo = document.getElementById("info");
+
+playerInfo.addEventListener("submit", function () {
+
+    var initials = document.getElementById("input").value;
+    var newScore = {initials:initials, score:score};
+    finalScore.push(newScore);
+    localStorage.setItem("finalScore", JSON.stringify(finalScore));
+})

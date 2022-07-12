@@ -11,7 +11,6 @@
 <body>
 
 <header>
-    <h3>View High Scores</h3>
     <h3 id="timer"></h3>
 </header>
 
@@ -33,7 +32,15 @@
         </p>
         <button class="startbtn btn" id="start">Start Quiz</button>
     </div>
+
+    <form class= 'hide' id="info">
+        <h3 id="endtext">Congratulations! The quiz is over. Please enter your name and hit submit to save your high score.</h3>
+        <input type="text" name="playername" id="input" placeholder="Enter your name">
+        <button type="submit" class="btn" id="endbtn">Submit Score</button>
+
+    </form>
 </main>
+
  
 <footer>
     <h3>Current Score:<span id="score"></span></h3>
