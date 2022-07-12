@@ -10,6 +10,7 @@ var OptionThree = document.querySelector(".btn3");
 var OptionFour = document.querySelector(".btn4");
 
 var currentScore = document.querySelector("#score");
+var timer = document.querySelector("#timer")
 
 startBtn.addEventListener('click', startQuiz);
 
@@ -21,7 +22,7 @@ var questions = [
       OptionTwo: "Booleans",
       OptionThree: "Alerts",
       OptionFour: "Numbers",
-      correct: "Three",
+      correct: OptionThree,
     },
     {
       question: "The condition in an if/else statement is enclosed with ______.",
@@ -29,7 +30,7 @@ var questions = [
       OptionTwo: "Curly brackets",
       OptionThree: "Parenthesis",
       OptionFour: "Square brackets",
-      correct: "Two",
+      correct: "",
     },
     {
       question: "Arrays in JavaScript can be used to store _____.",
@@ -53,7 +54,7 @@ var questions = [
       OptionTwo: "Terminal/bash",
       OptionThree: "For loops",
       OptionFour: "Console.log",
-      correct: "One",
+      correct: "OptionOne",
     },
   ];
   // declaring that my questions will start from the first one
@@ -64,6 +65,23 @@ var questions = [
     intro.classList.add('hide');
     questionPrompt.classList.remove('hide');
     startQuestion();
+    startTimer();
+};
+
+var startTimer = function () {
+
+    let timerInterval;
+    let count = 100;
+
+    timerInterval = setInterval(function () {
+        count--;
+        timer.textContent = count;
+        
+        if (counter = 0) {
+
+            alert("Out of time!")
+        }
+    }, 1000);
 };
 
 
@@ -77,31 +95,14 @@ function startQuestion () {
     OptionTwo.textContent = quest.OptionTwo;
     OptionThree.textContent = quest.OptionThree;
     OptionFour.textContent = quest.OptionFour;
+     
 }
 
-function selectAnswer () {}
-
-// const question1 = [
-//     {
-//         question: 'Commonly used data types DO NOT include:',
-//         answers: [
-//             {text: '1. Strings', correct: false},
-//             {text: '2. Boolean', correct: false},
-//             {text: '3. Alerts', correct: true},
-//             {text: '4. Numbers', correct: false}
-    
-//         ]
-//     }
-// ] 
-// const question2 = [
-//     {
-//         question: 'The condition in an if / else statement is enclosed with _____.',
-//         answers: [
-//             {text: '1. Quotes', correct: false},
-//             {text: '2. Curly Brackets', correct: true},
-//             {text: '3. Parenthesis', correct: false},
-//             {text: '4. Square Brackets', correct: false}
-    
-//         ]
-//     }
-// ]
+function selectAnswer (answer) {
+    if (answer === questions[nextQuestion].correct) {
+        alert("You are correct");
+    } else {
+        alert("You are incorrect")
+    }
+}
+selectAnswer();
