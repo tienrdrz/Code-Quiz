@@ -221,7 +221,6 @@ questionPrompt.classList.add('hide')
 }
 
 var playerInfo = document.getElementById("info");
-
 playerInfo.addEventListener("submit", function () {
 
     var initials = document.getElementById("input").value;
