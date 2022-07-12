@@ -4,74 +4,31 @@ var questionPrompt = document.querySelector(".question-prompt");
 //setting variables using query selector so i can access them in js
 var questionText = document.querySelector("#question");
 var answerButtonText = document.querySelector("#choices");
-var OptionOne = document.querySelector(".btn1");
-var OptionTwo = document.querySelector(".btn2");
-var OptionThree = document.querySelector(".btn3");
-var OptionFour = document.querySelector(".btn4");
+var OptionOne = document.querySelector("#btn1");
+var OptionTwo = document.querySelector("#btn2");
+var OptionThree = document.querySelector("#btn3");
+var OptionFour = document.querySelector("#btn4");
 
 var currentScore = document.querySelector("#score");
 var timer = document.querySelector("#timer")
 
 startBtn.addEventListener('click', startQuiz);
-
-// creating an array for all my questions and answers
-var questions = [
-    {
-      question: "Commonly used data types DO NOT include:",
-      OptionOne: "Strings",
-      OptionTwo: "Booleans",
-      OptionThree: "Alerts",
-      OptionFour: "Numbers",
-      correct: OptionThree,
-    },
-    {
-      question: "The condition in an if/else statement is enclosed with ______.",
-      OptionOne: "Quotes",
-      OptionTwo: "Curly brackets",
-      OptionThree: "Parenthesis",
-      OptionFour: "Square brackets",
-      correct: "",
-    },
-    {
-      question: "Arrays in JavaScript can be used to store _____.",
-      OptionOne: "Numbers and strings",
-      OptionTwo: "Other arrays",
-      OptionThree: "Booleans",
-      OptionFour: "All of the Above",
-      correct: "Four",
-    },
-    {
-      question: "String values must be enclosed within _____ when being assigned to variables.",
-      OptionOne: "Commas",
-      OptionTwo: "Curly brackets",
-      OptionThree: "Quotes",
-      OptionFour: "Parenthesis",
-      correct: "Three",
-    },
-    {
-      question: "A very useful tool used during development and debugging for printing content to the debugger is:",
-      OptionOne: "JavaScript",
-      OptionTwo: "Terminal/bash",
-      OptionThree: "For loops",
-      OptionFour: "Console.log",
-      correct: "OptionOne",
-    },
-  ];
-  // declaring that my questions will start from the first one
-  let nextQuestion = 0;
   
   // running a function to start the quiz after the button is clicked
   function startQuiz () {
     intro.classList.add('hide');
     questionPrompt.classList.remove('hide');
-    startQuestion();
+    questionOne();
+    answerOne();
     startTimer();
+    getScore();
 };
 
+// function to start a timer 
 var startTimer = function () {
 
     let timerInterval;
-    let count = 100;
+    let count = 51;
 
     timerInterval = setInterval(function () {
         count--;
@@ -84,25 +41,153 @@ var startTimer = function () {
     }, 1000);
 };
 
-
-
-// function to display the questions and answers
-function startQuestion () {
-    
-    let quest = questions[nextQuestion];
-    question.innerHTML = quest.question;
-    OptionOne.textContent = quest.OptionOne;
-    OptionTwo.textContent = quest.OptionTwo;
-    OptionThree.textContent = quest.OptionThree;
-    OptionFour.textContent = quest.OptionFour;
-     
+var score = 0;
+//setting score to 0 and creating a way to see your current score
+var getScore = function () {
+    currentScore.innerHTML = score;
 }
 
-function selectAnswer (answer) {
-    if (answer === questions[nextQuestion].correct) {
-        alert("You are correct");
-    } else {
-        alert("You are incorrect")
+function questionOne () {
+    question.innerHTML = "Commonly used data types DO NOT include:"
+    OptionOne.textContent = "Strings";
+    OptionTwo.textContent = "Booleans";
+    OptionThree.textContent = "Alerts";
+    OptionFour.textContent = "Numbers"
+}    
+
+function answerOne () {
+    OptionThree.onclick = function() {
+        score++;
+        questionTwo();
+        answerTwo();
+    }
+    OptionOne.onclick = function() {
+        score--;
+        questionTwo();
+        answerTwo();
+    }
+    OptionTwo.onclick = function() {
+        score--;
+        questionTwo();
+        answerTwo();
+    }
+    OptionFour.onclick = function() {
+        score--;
+        questionTwo();
+        answerTwo();
     }
 }
-selectAnswer();
+
+function questionTwo () {
+    question.innerHTML = "The condition in an if/else statement is enclosed with ______."
+    OptionOne.textContent = "Quotes";
+    OptionTwo.textContent = "Curly brackets";
+    OptionThree.textContent = "Parenthesis";  3
+    OptionFour.textContent = "Square brackets"
+}    
+
+function answerTwo () {
+    OptionThree.onclick = function() {
+        score++;
+        questionThree();
+        answerThree();
+    }
+    OptionOne.onclick = function() {
+        score--;
+        questionThree();
+        answerThree();
+    }
+    OptionTwo.onclick = function() {
+        score--;
+        questionThree();
+        answerThree();
+    }
+    OptionFour.onclick = function() {
+        score--;
+        questionThree();
+        answerThree();
+    }
+}
+
+function questionThree() {
+    question.innerHTML = "Arrays in JavaScript can be used to store _____.";
+    OptionOne.textContent = "Numbers and strings";
+    OptionTwo.textContent = "Other arrays";
+    OptionThree.textContent = "Booleans";
+    OptionFour.textContent = "All of the Above";  4
+}
+function answerThree () {
+    OptionFour.onclick = function() {
+        score++;
+        questionFour();
+        answerFour();
+    }
+    OptionOne.onclick = function() {
+        score--;
+        questionFour();
+        answerFour();
+    }
+    OptionTwo.onclick = function() {
+        score--;
+        questionFour();
+        answerFour();
+    }
+    OptionThree.onclick = function() {
+        score--;
+        questionFour();
+        answerFour();
+    }
+}
+
+function questionFour() {
+    question.innerHTML = "String values must be enclosed within _____ when being assigned to variables.";
+    OptionOne.textContent = "Commas";
+    OptionTwo.textContent = "Curly brackets";
+    OptionThree.textContent = "Quotes"; 3
+    OptionFour.textContent = "Parenthesis";
+}
+function answerFour () {
+    OptionThree.onclick = function() {
+        score++;
+        questionFive();
+        answerFive();
+    }
+    OptionOne.onclick = function() {
+        score--;
+        questionFive();
+        answerFive();
+    }
+    OptionTwo.onclick = function() {
+        score--;
+        questionFive();
+        answerFive();
+    }
+    OptionFour.onclick = function() {
+        score--;
+        questionFive();
+        answerFive();
+    }
+}
+
+function questionFive() {
+      question.innerHTML = "A very useful tool used during development and debugging for printing content to the debugger is:";
+      OptionOne.textContent = "JavaScript";
+      OptionTwo.textContent = "Terminal/bash";
+      OptionThree.textContent = "For loops"; 
+      OptionFour.textContent = "Console.log";
+}
+function answerFive () {
+    OptionOne.onclick = function() {
+        score++;
+    }
+    OptionThree.onclick = function() {
+        score--;
+    }
+    OptionTwo.onclick = function() {
+        score--;
+    }
+    OptionFour.onclick = function() {
+        score--;
+    }
+}
+getScore();
